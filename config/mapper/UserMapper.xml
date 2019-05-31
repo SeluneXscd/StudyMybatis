@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.selune.mybatis.mapper.UserMapper">
+
+    <insert id="insertUser">
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user_ (id, username) VALUES (#{id}, #{username})
+    </insert>
+
+    <update id="updateUser">
+        UPDATE user_ SET username= #{username} WHERE id= #{id}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM user_ WHERE id= #{id}
+    </delete>
+
+    <select id="findUserById" resultType="com.selune.mybatis.pojo.User">
+        SELECT * FROM user_ WHERE id= #{id}
+    </select>
+
+    <select id="findUserByName" resultType="com.selune.mybatis.pojo.User">
+        SELECT * FROM user_ WHERE username LIKE '%${username}%'
+    </select>
+
+</mapper>
