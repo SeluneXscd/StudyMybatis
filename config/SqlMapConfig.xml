@@ -21,7 +21,7 @@
     <mappers>
         <!-- 设置映射mapper -->
         <mapper resource="sqlmap/User.xml" />
-        <mapper class="mapper/UserMapper.xml" />
+        <mapper resource="mapper/UserMapper.xml" />
     </mappers>
 
 </configuration>
