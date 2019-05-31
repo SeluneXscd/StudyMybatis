@@ -42,21 +42,36 @@ public class UserMapperTest {
     public void findUserByName() throws Exception {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        List<User> userList = userMapper.findUserByName("张三");
+        List<User> userList = userMapper.findUserByName("三");
         System.out.println(userList);
         Assert.assertNull(userList.size());
     }
 
     @Test
     public void insertUser() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setUsername("zhang3");
+        userMapper.insertUser(user);
     }
 
     @Test
     public void deleteUser() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        userMapper.deleteUser(13);
     }
 
     @Test
     public void updateUser() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(13);
+        user.setUsername("new name");
+
+        userMapper.updateUser(user);
     }
 
 }
