@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间，作用就是对sql进行分类化管理,理解为sql隔离
+ 注意：使用mapper代理方法开发，namespace有特殊重要的作用
+ -->
+<mapper namespace="test">
+    <select id="findUserById" parameterType="int"
+            resultType="com.selune.mybatis.pojo.User">
+        SELECT * FROM user_ WHERE id= #{id}
+    </select>
+
+    <select id="findUserByName" parameterType="string"
+            resultType="com.selune.mybatis.pojo.User">
+        SELECT * FROM user_ WHERE username LIKE '%${value}%'
+    </select>
+
+    <insert id="insertUser" parameterType="com.selune.mybatis.pojo.User">
+        <!-- 用于获取下一个主键值，自增，用于数据表自增列 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO user_ (id, username) VALUES (#{id}, #{username})
+    </insert>
+
+    <delete id="deleteUser" parameterType="integer">
+        DELETE FROM user_ WHERE id= #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.selune.mybatis.pojo.User">
+        UPDATE user_ SET username= #{username}
+        WHERE id= #{id}
+    </update>
+</mapper>
