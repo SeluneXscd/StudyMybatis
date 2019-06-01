@@ -4,16 +4,48 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <!-- 配置读取优先级：
+            properties(属性)
+            settings(全局配置参数)
+            typeAliases(类型别名)
+            typeHandlers(类型处理器)
+            objectFactory(对象工厂)
+            plugins(插件)
+            environments(环境集合属性对象)
+                environment(环境子属性参数)
+                    transactionManager(事务管理)
+                    dataSource(数据源)
+            mapper(映射器)
+    -->
+    <properties resource="db.properties">
+        <!-- properties 中还可以配置一些属性名和属性值 -->
+        <!--<property name="driver" value=""/>-->
+        <!--<property name="url" value=""/>-->
+        <!--<property name="username" value=""/>-->
+        <!--<property name="password" value=""/>-->
+    </properties>
+
+    <typeAliases>
+        <!-- 针对单个别名定义
+        type: 类型的路径
+        alias: 别名
+        -->
+        <typeAlias type="com.selune.mybatis.pojo.User" alias="user" />
+        <!-- 批量定义别名
+            指定包名，mybatis自动扫描包内pojo类，自动定义别名，别名就是类名。(首字母大小写均可)
+        -->
+        <package name="com.selune.mybatis.pojo"/>
+    </typeAliases>
 
     <!-- environments 设置数据库连接 -->
     <environments default="default">
         <environment id="default">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://seluneadminout.mysql.rds.aliyuncs.com:3306/test?characterEncoding=UTF-8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="XYP@1224susu"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
@@ -22,6 +54,7 @@
         <!-- 设置映射mapper -->
         <mapper resource="sqlmap/User.xml" />
         <mapper resource="mapper/UserMapper.xml" />
+        <package name="com.selune.mybatis.mapper"/>
     </mappers>
 
 </configuration>
