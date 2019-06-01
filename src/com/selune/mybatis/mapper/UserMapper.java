@@ -31,5 +31,10 @@ public interface UserMapper {
     /** 查询所有 */
     public List<UserCustom> findUserList(UserQueryVO userQueryVO) throws Exception;
 
+    /** 查询所有数量 */
     public int findUserCount(UserQueryVO userQueryVO) throws Exception;
+
+    /** 根据id查询，通过resultMap输出 */
+    public User findUserByIdResultMap(int id) throws Exception;
+
 }

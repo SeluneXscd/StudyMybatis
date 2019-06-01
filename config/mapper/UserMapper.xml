@@ -47,4 +47,34 @@
                                                                           '%${userCustom.username}%'
     </select>
 
+    <!-- 定义resultMap
+         将SELECT id id_, username username_ FROM user_ 和User类中的属性作一个映射关系
+         type: resultMap 最终映射的java对象类型，可以使用别名
+         id: 对resultMap的唯一标识
+         使用resultType进行输出映射，只有查询出来的列和pojo中的属性名一致才能映射成功
+         如果查出的列名和pojo中的属性名不一致，那么可以定义一个resultMap对列名和属性名作映射
+     -->
+    <resultMap id="userResultMap" type="user">
+        <!-- id: 查询结果集中唯一标识
+             column: 查询出的列名
+             property: type指定的pojo类型中的属性名
+             最终resultMap对column和property做一个映射关系
+         -->
+        <id column="id_" property="id" />
+        <!-- result: 对普通名映射定义
+             column: 查询出来的列名
+             property: type指定的pojo类型中的属性名
+             最终resultMap对column和property作一个映射关系
+         -->
+        <result column="username_" property="username" />
+        <result column="sex_" property="sex" />
+        <result column="bir_" property="bir" />
+    </resultMap>
+    <!-- 使用resultMap进行输出映射
+         resultMap: 指定的resultMap的id，如果这个resultMap在其他的mapper文件中，前面需要加上namespace
+     -->
+    <select id="findUserByIdResultMap" parameterType="int" resultMap="userResultMap">
+        SELECT id id_, username username_, sex sex_, bir bir_ FROM user_ WHERE id= #{id}
+    </select>
+
 </mapper>

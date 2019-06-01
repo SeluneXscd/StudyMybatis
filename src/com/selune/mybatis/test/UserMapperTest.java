@@ -107,4 +107,13 @@ public class UserMapperTest {
         System.out.println(count);
     }
 
+    @Test
+    public void testFindUserByIdResultMap() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = userMapper.findUserByIdResultMap(1);
+        System.out.println(user);
+    }
+
 }
