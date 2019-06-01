@@ -92,4 +92,19 @@ public class UserMapperTest {
         System.out.println(userCustomList);
     }
 
+    @Test
+    public void testFindUserCount() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        UserQueryVO userQueryVO = new UserQueryVO();
+        UserCustom userCustom = new UserCustom();
+        userCustom.setSex("男");
+        userCustom.setUsername("");
+        userQueryVO.setUserCustom(userCustom);
+
+        int count = userMapper.findUserCount(userQueryVO);
+        System.out.println(count);
+    }
+
 }

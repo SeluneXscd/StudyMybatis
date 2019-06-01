@@ -37,4 +37,14 @@
                                                                    '%${userCustom.username}%'
     </select>
 
+    <!-- 用户信息查询总数
+        parameterType: 指定输入类型
+        resultType: 输出结果类型
+    -->
+    <select id="findUserCount" parameterType="com.selune.mybatis.pojo.UserQueryVO"
+            resultType="int">
+        SELECT count(*) FROM user_ WHERE user_.sex= #{userCustom.sex} AND user_.username LIKE
+                                                                          '%${userCustom.username}%'
+    </select>
+
 </mapper>
