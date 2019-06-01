@@ -1,7 +1,8 @@
 package com.selune.mybatis.mapper;
 
 import com.selune.mybatis.pojo.User;
-import org.apache.ibatis.annotations.Select;
+import com.selune.mybatis.pojo.UserCustom;
+import com.selune.mybatis.pojo.UserQueryVO;
 
 import java.util.List;
 
@@ -26,4 +27,7 @@ public interface UserMapper {
 
     /** 更新用户 */
     public void updateUser(User user) throws Exception;
+
+    /** 查询所有 */
+    public List<UserCustom> findUserList(UserQueryVO userQueryVO) throws Exception;
 }

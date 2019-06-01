@@ -2,6 +2,8 @@ package com.selune.mybatis.test;
 
 import com.selune.mybatis.mapper.UserMapper;
 import com.selune.mybatis.pojo.User;
+import com.selune.mybatis.pojo.UserCustom;
+import com.selune.mybatis.pojo.UserQueryVO;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -72,6 +74,22 @@ public class UserMapperTest {
         user.setUsername("new name");
 
         userMapper.updateUser(user);
+    }
+    @Test
+    public void testFindUserList() throws Exception {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        UserQueryVO userQueryVO = new UserQueryVO();
+        UserCustom userCustom = new UserCustom();
+        userCustom.setUsername("张三");
+        userCustom.setSex("男");
+
+        userQueryVO.setUserCustom(userCustom);
+
+        List<UserCustom> userCustomList = userMapper.findUserList(userQueryVO);
+        System.out.println(userCustomList);
     }
 
 }

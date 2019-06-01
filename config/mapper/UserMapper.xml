@@ -27,4 +27,14 @@
         SELECT * FROM user_ WHERE username LIKE '%${username}%'
     </select>
 
+    <!-- 用户信息综合查询
+        #{userCustom.sex}: 取出pojo包装对象中的性别
+        #{userCustom.username}: 取出pojo包装对象中的用户名
+    -->
+    <select id="findUserList" parameterType="com.selune.mybatis.pojo.UserQueryVO"
+            resultType="com.selune.mybatis.pojo.UserCustom">
+        SELECT * FROM user_ WHERE user_.sex= #{userCustom.sex} AND user_.username LIKE
+                                                                   '%${userCustom.username}%'
+    </select>
+
 </mapper>
