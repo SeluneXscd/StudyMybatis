@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.selune.mybatis.mapper.OrdersMapper">
+
+    <select id="findOrdersUser" resultType="com.selune.mybatis.pojo.OrdersCustom">
+        <!-- 一对一查询
+            确定查询的主表: orders_
+            确定查询的关联表: user_
+        -->
+        SELECT
+            orders_.*,
+            user_.username,
+            user_.sex,
+            user_.address
+        FROM
+            orders_,
+            user_
+        WHERE
+            orders_.user_id = user_.id
+    </select>
+
+    <resultMap id="OrdersUserResultMap" type="com.selune.mybatis.pojo.Orders">
+        <!-- 配置映射的订单信息 -->
+        <id column="id" property="id" />
+        <result column="user_id" property="userId"/>
+        <result column="number" property="number"/>
+        <result column="note" property="note" />
+        <result column="createtime" property="createtime"/>
+
+        <!-- 配置映射的关联的用户信息 -->
+        <association property="user" javaType="com.selune.mybatis.pojo.User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+
+    <select id="findOrdersUserByResultMap" resultMap="OrdersUserResultMap">
+        <!-- 一对一查询 -->
+        SELECT
+            orders_.*,
+            user_.username,
+            user_.sex,
+            user_.address
+        FROM
+            user_,
+            orders_
+        WHERE
+            orders_.user_id = user_.id
+    </select>
+
+
+</mapper>

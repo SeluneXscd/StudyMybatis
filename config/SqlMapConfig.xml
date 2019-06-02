@@ -54,6 +54,7 @@
         <!-- 设置映射mapper -->
         <mapper resource="sqlmap/User.xml" />
         <mapper resource="mapper/UserMapper.xml" />
+        <mapper resource="mapper/OrdersMapper.xml" />
         <!-- package 自动映射不能和resource 共存 -->
 <!--        <package name="com.selune.mybatis.mapper"/>-->
     </mappers>
