@@ -50,6 +50,22 @@
         </where>
     </select>
 
+    <!-- 定义sql片段
+         id: sql片段唯一标识
+         基于单表来定义sql片段，sql片段的可重用性才高
+         在sql片段中不要包含where
+     -->
+    <sql id="query_user_where">
+        <if test="userCustom != null">
+            <if test="userCustom.sex != null and userCustom.sex !=''">
+                AND user_.sex= #{userCustom.sex}
+            </if>
+            <if test="userCustom.username != null and userCustom.username != ''">
+                AND user_.username LIKE '%${userCustom.username}%'
+            </if>
+        </if>
+    </sql>
+
     <!-- 用户信息查询总数
         parameterType: 指定输入类型
         resultType: 输出结果类型
