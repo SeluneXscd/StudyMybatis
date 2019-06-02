@@ -18,4 +18,6 @@ public interface OrdersMapper {
 
     /** 查询订单关联用户信息 resultMap */
     public List<OrdersCustom> findOrdersUserByResultMap() throws Exception;
+
+    public List<OrdersCustom> findOrdersAndOrderDetailResultMap() throws Exception;
 }

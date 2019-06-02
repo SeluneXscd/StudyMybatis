@@ -13,6 +13,7 @@ public class Orders {
 
     private User user;
 
+    private List<Orderdetail> orderdetailList;
 
     private Integer id;
 

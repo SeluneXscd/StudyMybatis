@@ -22,6 +22,7 @@
             orders_.user_id = user_.id
     </select>
 
+    <!-- 订单表和用户表的resultMap -->
     <resultMap id="OrdersUserResultMap" type="com.selune.mybatis.pojo.Orders">
         <!-- 配置映射的订单信息 -->
         <id column="id" property="id" />
@@ -51,6 +52,49 @@
             orders_
         WHERE
             orders_.user_id = user_.id
+    </select>
+
+    <!-- 订单及订单明细的resultMap
+         使用extends继承，不用再配置订单和用户的映射
+     -->
+    <resultMap id="OrdersAndOrderDetailResultMap" type="com.selune.mybatis.pojo.Orders"
+               extends="OrdersUserResultMap">
+        <!-- orders -->
+        <!-- user -->
+        <!-- extends 继承，不用再配置orders和user 的映射 -->
+
+        <!-- orderDetail
+             一个订单关联查询多条记录，要使用collection映射
+             collection: 对关联查询到多条记录映射到集合对象中
+             properties: 将关联查询到多条记录映射到Orders的属性
+             ofType: 指定映射到集合的pojo类型
+        -->
+        <collection property="orderdetailList"
+                    ofType="com.selune.mybatis.pojo.Orderdetail">
+            <id column="id" property="id"/>
+            <result column="items_id" property="itemsId"/>
+            <result column="items_num" property="itemsNum"/>
+            <result column="orders_id" property="ordersId"/>
+        </collection>
+    </resultMap>
+
+    <select id="findOrdersAndOrderDetailResultMap"
+            resultMap="OrdersAndOrderDetailResultMap">
+        SELECT
+            orders_.*,
+            user_.username,
+            user_.sex,
+            user_.address,
+            orderdetail_.id orderdetail_id,
+            orderdetail_.items_id,
+            orderdetail_.items_num,
+            orderdetail_.orders_id
+        FROM
+            orders_,
+            orderdetail_,
+            user_
+        WHERE
+            orders_.user_id = user_.id AND orderdetail_.orders_id = orders_.id
     </select>
 
 
