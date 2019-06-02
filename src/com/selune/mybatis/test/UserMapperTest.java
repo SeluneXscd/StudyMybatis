@@ -83,12 +83,13 @@ public class UserMapperTest {
 
         UserQueryVO userQueryVO = new UserQueryVO();
         UserCustom userCustom = new UserCustom();
-        userCustom.setUsername("张三");
+//        userCustom.setUsername("张三");
         userCustom.setSex("男");
 
         userQueryVO.setUserCustom(userCustom);
 
-        List<UserCustom> userCustomList = userMapper.findUserList(userQueryVO);
+//        List<UserCustom> userCustomList = userMapper.findUserList(userQueryVO);
+        List<UserCustom> userCustomList = userMapper.findUserList(null);
         System.out.println(userCustomList);
     }
 
@@ -100,7 +101,7 @@ public class UserMapperTest {
         UserQueryVO userQueryVO = new UserQueryVO();
         UserCustom userCustom = new UserCustom();
         userCustom.setSex("男");
-        userCustom.setUsername("");
+//        userCustom.setUsername("");
         userQueryVO.setUserCustom(userCustom);
 
         int count = userMapper.findUserCount(userQueryVO);

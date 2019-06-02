@@ -33,8 +33,21 @@
     -->
     <select id="findUserList" parameterType="com.selune.mybatis.pojo.UserQueryVO"
             resultType="com.selune.mybatis.pojo.UserCustom">
-        SELECT * FROM user_ WHERE user_.sex= #{userCustom.sex} AND user_.username LIKE
-                                                                   '%${userCustom.username}%'
+        <!-- SELECT * FROM user_ WHERE user_.sex= #{userCustom.sex} AND user_.username LIKE
+                                                                   '%${userCustom.username}%' -->
+        SELECT * FROM user_
+        <!-- where 可以自动去掉条件中的第一个AND -->
+        <where>
+            <!-- if 判断 -->
+            <if test="userCustom != null">
+                <if test="userCustom.sex != null and userCustom.sex != ''">
+                    AND user_.sex= #{userCustom.sex}
+                </if>
+                <if test="userCustom.username != null and userCustom.username != ''">
+                    AND user_.username LIKE '%${userCustom.username}%'
+                </if>
+            </if>
+        </where>
     </select>
 
     <!-- 用户信息查询总数
@@ -43,8 +56,19 @@
     -->
     <select id="findUserCount" parameterType="com.selune.mybatis.pojo.UserQueryVO"
             resultType="int">
-        SELECT count(*) FROM user_ WHERE user_.sex= #{userCustom.sex} AND user_.username LIKE
-                                                                          '%${userCustom.username}%'
+        <!-- SELECT count(*) FROM user_ WHERE user_.sex= #{userCustom.sex} AND user_.username LIKE
+                                                                 '%${userCustom.username}%' -->
+        SELECT count(*) FROM user_
+        <where>
+            <if test="userCustom != null">
+                <if test="userCustom.sex != null and userCustom.sex != ''">
+                    AND user_.sex= #{userCustom.sex}
+                </if>
+                <if test="userCustom.username != null and userCustom.username != ''">
+                    AND user_.username LIKE '%${userCustom.username}%'
+                </if>
+            </if>
+        </where>
     </select>
 
     <!-- 定义resultMap
