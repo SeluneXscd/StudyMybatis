@@ -17,6 +17,8 @@ public class User {
 
     private Date birthday;
 
+    private String address;
+
     public int getId() {
         return id;
     }
@@ -49,6 +51,14 @@ public class User {
         this.birthday = birthday;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -56,6 +66,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birthday=" + birthday +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
