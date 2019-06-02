@@ -60,14 +60,11 @@
                                                                  '%${userCustom.username}%' -->
         SELECT count(*) FROM user_
         <where>
-            <if test="userCustom != null">
-                <if test="userCustom.sex != null and userCustom.sex != ''">
-                    AND user_.sex= #{userCustom.sex}
-                </if>
-                <if test="userCustom.username != null and userCustom.username != ''">
-                    AND user_.username LIKE '%${userCustom.username}%'
-                </if>
-            </if>
+            <!-- include 引用sql片段
+                 refid: 使用id引用
+                 如果id不在本mapper中，需要加入namespace
+             -->
+            <include refid="query_user_where" />
         </where>
     </select>
 
