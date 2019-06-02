@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -115,6 +116,21 @@ public class UserMapperTest {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.findUserByIdResultMap(1);
         System.out.println(user);
+    }
+
+    @Test
+    public void testFindUserListByIds() throws Exception {
+        List<Integer> ids = new ArrayList<>();
+        ids.add(1);
+        ids.add(10);
+        ids.add(16);
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        UserQueryVO userQueryVO = new UserQueryVO();
+        userQueryVO.setIds(ids);
+        List<UserCustom> userCustomList = userMapper.findUserListByIds(userQueryVO);
+        System.out.println(userCustomList);
     }
 
 }

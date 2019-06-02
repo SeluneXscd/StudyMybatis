@@ -37,4 +37,7 @@ public interface UserMapper {
     /** 根据id查询，通过resultMap输出 */
     public User findUserByIdResultMap(int id) throws Exception;
 
+    /** 传入多个ids */
+    public List<UserCustom> findUserListByIds(UserQueryVO userQueryVO) throws Exception;
+
 }

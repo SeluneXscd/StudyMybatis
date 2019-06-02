@@ -114,4 +114,32 @@
         SELECT id id_, username username_, sex sex_, bir bir_ FROM user_ WHERE id= #{id}
     </select>
 
+    <select id="findUserListByIds" parameterType="com.selune.mybatis.pojo.UserQueryVO"
+            resultType="com.selune.mybatis.pojo.UserCustom">
+        SELECT * FROM user_
+        <where>
+            <if test="ids != null">
+                <!-- 使用foreach遍历传入ids
+                     collection: 指定输入 对象中集合属性
+                     item: 每个遍历生成对象中
+                     open: 开始遍历的连接串
+                     close: 结束遍历的连接串
+                     separator: 遍历的两个对象中的连接词
+                -->
+                <!-- 使用实现下边的sql链接
+                    AND (id = 1 OR id = 10 OR id = 16)
+                -->
+                <foreach collection="ids" item="user_id" open="AND (" close=")" separator="or">
+                    id= #{user_id}
+                </foreach>
+                <!--
+                   实现 "AND id IN(1, 10, 16)" 的凭拼接
+                -->
+                <!--<foreach collection="ids" item="user_id" open="AND id IN (" close=")" separator=",">
+                    #{user_id}
+                </foreach>-->
+            </if>
+        </where>
+    </select>
+
 </mapper>
