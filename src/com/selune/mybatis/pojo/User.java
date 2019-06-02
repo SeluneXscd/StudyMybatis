@@ -15,7 +15,7 @@ public class User {
 
     private String sex;
 
-    private Date bir;
+    private Date birthday;
 
     public int getId() {
         return id;
@@ -41,12 +41,12 @@ public class User {
         this.sex = sex;
     }
 
-    public Date getBir() {
-        return bir;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBir(Date bir) {
-        this.bir = bir;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", sex='" + sex + '\'' +
-                ", bir=" + bir +
+                ", birthday=" + birthday +
                 '}';
     }
 }

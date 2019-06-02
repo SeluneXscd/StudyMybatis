@@ -105,13 +105,13 @@
          -->
         <result column="username_" property="username" />
         <result column="sex_" property="sex" />
-        <result column="bir_" property="bir" />
+        <result column="bir_" property="birthday" />
     </resultMap>
     <!-- 使用resultMap进行输出映射
          resultMap: 指定的resultMap的id，如果这个resultMap在其他的mapper文件中，前面需要加上namespace
      -->
     <select id="findUserByIdResultMap" parameterType="int" resultMap="userResultMap">
-        SELECT id id_, username username_, sex sex_, bir bir_ FROM user_ WHERE id= #{id}
+        SELECT id id_, username username_, sex sex_, birthday bir_ FROM user_ WHERE id= #{id}
     </select>
 
     <select id="findUserListByIds" parameterType="com.selune.mybatis.pojo.UserQueryVO"
