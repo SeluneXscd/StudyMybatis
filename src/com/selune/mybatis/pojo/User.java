@@ -47,8 +47,8 @@ public class User {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(Date bir) {
+        this.birthday = bir;
     }
 
     public String getAddress() {
