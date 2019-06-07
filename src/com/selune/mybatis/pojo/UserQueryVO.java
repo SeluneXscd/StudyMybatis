@@ -10,11 +10,13 @@ import java.util.List;
 
 public class UserQueryVO {
 
-    // 包装所需要的查询条件
-    // 传入多个id
+    /**
+     * 包装所需要的查询条件
+     * 传入多个id
+    */
     private List<Integer> ids;
 
-    // 用户查询条件
+    /** 用户查询条件 */
     private UserCustom userCustom;
 
     public List<Integer> getIds() {
