@@ -37,7 +37,7 @@ public class UserMapperTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         User user = userMapper.findUserById(1);
-        Assert.assertEquals("张三", user.getUsername());
+        Assert.assertEquals("王五", user.getUsername());
         System.out.println(user);
     }
 
